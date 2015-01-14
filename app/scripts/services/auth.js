@@ -16,19 +16,30 @@ angular.module('mhacksFirechatApp')
     return {
       signup: function (user) {
         var deferred = $q.defer();
-        ref.createUser(user, function (err) {
-          if (err) { deferred.reject(err); }
-          else { deferred.resolve(); }
-        });
+        try {
+          ref.createUser(user, function (err) {
+            if (err) { deferred.reject(err); }
+            else { deferred.resolve(); }
+          });
+        } catch (err) {
+          deferred.reject(err.message);
+        }
         return deferred.promise;
       },
       login: function (user) {
         var deferred = $q.defer();
-        ref.authWithPassword(user, function (err, auth) {
-          if (err) { deferred.reject(err); }
-          else { deferred.resolve(auth) }
-        })
+        try {
+          ref.authWithPassword(user, function (err, auth) {
+            if (err) { deferred.reject(err); }
+            else { deferred.resolve(auth) }
+          })
+        } catch (err) {
+          deferred.reject(err.message);
+        }
         return deferred.promise;
+      },
+      getCurrentUserEmail: function () {
+        return ref.getAuth().password.email;
       }
     };
   });
