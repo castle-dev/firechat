@@ -31,8 +31,8 @@ angular.module('mhacksFirechatApp')
         try {
           ref.authWithPassword(user, function (err, auth) {
             if (err) { deferred.reject(err); }
-            else { deferred.resolve(auth) }
-          })
+            else { deferred.resolve(auth); }
+          });
         } catch (err) {
           deferred.reject(err.message);
         }
@@ -44,7 +44,7 @@ angular.module('mhacksFirechatApp')
           return {
             email: auth.password.email,
             id: auth.uid
-          }
+          };
         }
         $location.path('/login');
       }

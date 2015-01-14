@@ -16,5 +16,5 @@ angular.module('mhacksFirechatApp')
       .then(function () { return auth.login($scope.user); })
       .then(function () { $location.path('/'); })
       .catch(function (err) { $scope.errors.push(err); });
-    }
+    };
   });

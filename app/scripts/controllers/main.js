@@ -21,5 +21,5 @@ angular.module('mhacksFirechatApp')
         text: $scope.newMessage
       });
       $scope.newMessage = '';
-    }
+    };
   });
