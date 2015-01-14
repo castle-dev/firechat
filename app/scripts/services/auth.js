@@ -8,7 +8,7 @@
  * Factory in the mhacksFirechatApp.
  */
 angular.module('mhacksFirechatApp')
-  .factory('auth', function ($window, $q) {
+  .factory('auth', function ($window, $q, $location) {
 
     var ref = new $window.Firebase('https://mhacks-firechat-765432.firebaseio.com/');
 
@@ -39,7 +39,11 @@ angular.module('mhacksFirechatApp')
         return deferred.promise;
       },
       getCurrentUserEmail: function () {
-        return ref.getAuth().password.email;
+        if (ref.getAuth()) {
+          return ref.getAuth().password.email;
+        } else {
+          $location.path('/login');
+        }
       }
     };
   });
