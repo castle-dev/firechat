@@ -38,12 +38,15 @@ angular.module('mhacksFirechatApp')
         }
         return deferred.promise;
       },
-      getCurrentUserEmail: function () {
-        if (ref.getAuth()) {
-          return ref.getAuth().password.email;
-        } else {
-          $location.path('/login');
+      getCurrentUser: function () {
+        var auth = ref.getAuth();
+        if (auth) {
+          return {
+            email: auth.password.email,
+            id: auth.uid
+          }
         }
+        $location.path('/login');
       }
     };
   });
