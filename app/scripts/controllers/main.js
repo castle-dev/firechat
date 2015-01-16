@@ -10,7 +10,7 @@
 angular.module('mhacksFirechatApp')
   .controller('MainCtrl', function ($scope, $window, $firebase, auth) {
     var ref = new $window.Firebase('https://mhacks-firechat-765432.firebaseio.com/');
-    var sync = $firebase(ref);
+    var sync = $firebase(ref.child('messages'));
     $scope.messages = sync.$asArray();
     $scope.user = auth.getCurrentUser();
 
